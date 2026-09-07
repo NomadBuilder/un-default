@@ -2475,7 +2475,7 @@ function feedbackEventFromFinding(finding, kind, options) {
     sourceKind: options?.sourceKind
   };
 }
-var ISSUE_NEW = "https://github.com/NomadBuilder/anti-default/issues/new";
+var ISSUE_NEW = "https://github.com/NomadBuilder/un-default/issues/new";
 var FEEDBACK_STORAGE_KEY = "un-default.feedbackEvents.v1";
 var LEGACY_FEEDBACK_STORAGE_KEY = "anti-default.feedbackEvents.v1";
 function recordFeedbackLocally(event) {

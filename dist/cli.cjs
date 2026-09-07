@@ -80,7 +80,7 @@ var ISSUE_NEW;
 var init_feedback = __esm({
   "src/lib/feedback.ts"() {
     "use strict";
-    ISSUE_NEW = "https://github.com/NomadBuilder/anti-default/issues/new";
+    ISSUE_NEW = "https://github.com/NomadBuilder/un-default/issues/new";
   }
 });
 
@@ -3707,7 +3707,7 @@ function formatSarif(report) {
           driver: {
             name: "Un-Default",
             version: report.version,
-            informationUri: "https://github.com/NomadBuilder/anti-default",
+            informationUri: "https://github.com/NomadBuilder/un-default",
             rules: [...rulesMap.values()]
           }
         },
@@ -3952,7 +3952,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: NomadBuilder/anti-default@v1
+      - uses: NomadBuilder/un-default@v1
         with:
           changed-from: \${{ github.event.pull_request.base.sha }}
           format: json
