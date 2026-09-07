@@ -79,11 +79,16 @@ jobs:
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.skip_npm) }}
         run: npm install -g npm@latest
 
+      # Prefer npm Trusted Publishing (OIDC) — no long-lived NPM_TOKEN.
+      # Configure once: https://www.npmjs.com/package/anti-default → Settings →
+      # Trusted Publisher → GitHub Actions:
+      #   user: NomadBuilder  repo: un-default  workflow: publish.yml
+      # Do not set NODE_AUTH_TOKEN here — an empty/expired token breaks OIDC.
+      # Fallback only: add NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} after creating
+      # a fresh granular token (publish + bypass 2FA) as repo secret NPM_TOKEN.
       - name: Publish to npm
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.skip_npm) }}
         run: npm publish --access public --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Wait for npm (ownership check)
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.skip_npm) }}

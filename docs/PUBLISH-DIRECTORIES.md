@@ -36,9 +36,20 @@ git push origin v0.5.5
 4. `mcp-publisher` → official MCP Registry (GitHub OIDC)  
 5. Print the manual directory checklist  
 
-**GitHub secret:** `NPM_TOKEN` (granular publish token), **or** configure npm
-[trusted publishing](https://docs.npmjs.com/trusted-publishers) for this repo so
-OIDC provenance works without a classic token.
+**Preferred:** npm [trusted publishing](https://docs.npmjs.com/trusted-publishers)
+(OIDC — no long-lived token). On https://www.npmjs.com/package/anti-default →
+Settings → Trusted Publisher → GitHub Actions:
+
+| Field | Value |
+|-------|--------|
+| Organization or user | `NomadBuilder` |
+| Repository | `un-default` |
+| Workflow filename | `publish.yml` |
+
+**Fallback:** GitHub secret `NPM_TOKEN` — npm granular access token with
+**Read and write** on `anti-default`, **Bypass 2FA** for automation. Granular
+tokens expire (often ~90 days); prefer trusted publishing so releases don’t
+break when tokens expire.
 
 MCP Registry OIDC needs no extra secret (`id-token: write` is already set).
 
